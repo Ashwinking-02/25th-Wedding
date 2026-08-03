@@ -48,6 +48,14 @@
     <p>Celebrating 25 Years of Love, Laughter & Togetherness</p>
 </header>
 
+<div class="music-player">
+    <button id="musicBtn" onclick="toggleMusic()">▶ Play Music</button>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="music/song.mp3" type="audio/mpeg">
+</audio>
+
 <div class="gallery" id="gallery"></div>
 
 <!-- <div id="popup" class="popup" onclick="closeImage()">
@@ -60,7 +68,11 @@
     <button class="prev" onclick="prevImage()">❮</button>
 
     <img id="popupImg">
-
+<a id="downloadBtn" download>
+    <button class="download-btn">
+        📥 Download
+    </button>
+</a>
     <button class="next" onclick="nextImage()">❯</button>
 
  </div>

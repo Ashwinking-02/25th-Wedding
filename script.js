@@ -1,3 +1,15 @@
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+function toggleMusic() {
+    if (music.paused) {
+        music.play();
+        musicBtn.innerHTML = "⏸ Pause Music";
+    } else {
+        music.pause();
+        musicBtn.innerHTML = "▶ Play Music";
+    }
+}
 const gallery = document.getElementById("gallery");
 const totalImages = 22; // Change to 332 later if needed
 
@@ -24,6 +36,7 @@ function openImage(index) {
     document.getElementById("popup").style.display = "flex";
 
     document.getElementById("popupImg").src = `images/${currentImage}.jpg`;
+    document.getElementById("downloadBtn").href= `images/${currentImage}.JPG`;
 }
 
 function closeImage() {
@@ -49,6 +62,7 @@ function nextImage() {
     img.onload = () => {
         img.classList.remove("slide-left");
     };
+    document.getElementById("downloadBtn").href= `images/${currentImage}.JPG`;
 }
 function prevImage() {
 
@@ -68,6 +82,7 @@ function prevImage() {
     img.onload = () => {
         img.classList.remove("slide-right");
     };
+    document.getElementById("downloadBtn").href=`images/${currentImage}.JPG`;
 }
 
 // Keyboard Controls

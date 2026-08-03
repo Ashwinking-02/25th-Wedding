@@ -278,3 +278,48 @@ header p{
         opacity:1;
     }
 }
+.download-btn{
+
+    position:absolute;
+
+    bottom:30px;
+
+    background:#d4af37;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.download-btn:hover{
+
+    background:#b8860b;
+
+}
+.music-player{
+    text-align:center;
+    margin:20px;
+}
+
+.music-player button{
+    padding:12px 25px;
+    font-size:18px;
+    background:#d4af37;
+    color:white;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+.music-player button:hover{
+    background:#b8860b;
+}
