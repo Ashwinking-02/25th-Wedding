@@ -8,7 +8,7 @@ for (let i = 1; i <= totalImages; i++) {
 
     const img = document.createElement("img");
 
-    img.src = `images/${i}.jpg`;
+    img.src = `images/${i}.JPG`;
 
     img.onclick = function () {
         openImage(i);
@@ -39,9 +39,17 @@ function nextImage() {
         currentImage = 1;
     }
 
-    document.getElementById("popupImg").src = `images/${currentImage}.jpg`;
-}
+    const img = document.getElementById("popupImg");
 
+    img.classList.remove("slide-right");
+    img.classList.add("slide-left");
+
+    img.src = `images/${currentImage}.JPG`;
+
+    img.onload = () => {
+        img.classList.remove("slide-left");
+    };
+}
 function prevImage() {
 
     currentImage--;
@@ -50,8 +58,18 @@ function prevImage() {
         currentImage = totalImages;
     }
 
-    document.getElementById("popupImg").src = `images/${currentImage}.jpg`;
+    const img = document.getElementById("popupImg");
+
+    img.classList.remove("slide-left");
+    img.classList.add("slide-right");
+
+    img.src = `images/${currentImage}.JPG`;
+
+    img.onload = () => {
+        img.classList.remove("slide-right");
+    };
 }
+
 // Keyboard Controls
 document.addEventListener("keydown", function (event) {
 

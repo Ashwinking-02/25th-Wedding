@@ -240,3 +240,41 @@ header p{
     color:black;
 
 }
+/* Smooth image animation */
+
+.popup img{
+    max-width:90%;
+    max-height:90%;
+    object-fit:contain;
+    transition:transform 0.35s ease, opacity 0.35s ease;
+}
+
+.slide-left{
+    animation:slideLeft .35s ease;
+}
+
+.slide-right{
+    animation:slideRight .35s ease;
+}
+
+@keyframes slideLeft{
+    from{
+        transform:translateX(120px);
+        opacity:0;
+    }
+    to{
+        transform:translateX(0);
+        opacity:1;
+    }
+}
+
+@keyframes slideRight{
+    from{
+        transform:translateX(-120px);
+        opacity:0;
+    }
+    to{
+        transform:translateX(0);
+        opacity:1;
+    }
+}
