@@ -17,16 +17,18 @@ for (let i = 1; i <= totalImages; i++) {
     gallery.appendChild(img);
 }
 
-function openImage(index) {
+function openImage(index){
 
     currentImage = index;
 
     document.getElementById("popup").style.display = "flex";
 
-    document.getElementById("popupImg").src = `images/${currentImage}.JPG`;
-    document.getElementById("downloadBtn").href= `images/${currentImage}.JPG`;
-}
+    document.getElementById("popupImg").src =
+        `images/${currentImage}.JPG`;
 
+    document.getElementById("downloadBtn").href =
+        `images/${currentImage}.JPG`;
+}
 function closeImage() {
 
     document.getElementById("popup").style.display = "none";
