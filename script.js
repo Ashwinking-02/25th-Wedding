@@ -89,3 +89,29 @@ document.addEventListener("keydown", function (event) {
     }
 
 });
+// =========================
+// Mobile Swipe Navigation
+// =========================
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+const popup = document.getElementById("popup");
+
+popup.addEventListener("touchstart", function (e) {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+popup.addEventListener("touchend", function (e) {
+    touchEndX = e.changedTouches[0].screenX;
+
+    // Swipe Left → Next Photo
+    if (touchStartX - touchEndX > 50) {
+        nextImage();
+    }
+
+    // Swipe Right → Previous Photo
+    if (touchEndX - touchStartX > 50) {
+        prevImage();
+    }
+});
