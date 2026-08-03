@@ -1,6 +1,5 @@
-
-const gallery = document.getElementById("gallery");
-const totalImages = 22; // Change to 332 later if needed
+ const gallery = document.getElementById("gallery");
+const totalImages = 23; // Change to 332 later if needed
 
 let currentImage = 1;
 
@@ -24,7 +23,7 @@ function openImage(index) {
 
     document.getElementById("popup").style.display = "flex";
 
-    document.getElementById("popupImg").src = `images/${currentImage}.jpg`;
+    document.getElementById("popupImg").src = `images/${currentImage}.JPG`;
     document.getElementById("downloadBtn").href= `images/${currentImage}.JPG`;
 }
 
@@ -101,12 +100,12 @@ document.addEventListener("keydown", function (event) {
 
         case "Home":
             currentImage = 1;
-            document.getElementById("popupImg").src = `images/${currentImage}.jpg`;
+            document.getElementById("popupImg").src = `images/${currentImage}.JPG`;
             break;
 
         case "End":
             currentImage = totalImages;
-            document.getElementById("popupImg").src = `images/${currentImage}.jpg`;
+            document.getElementById("popupImg").src = `images/${currentImage}.JPG`;
             break;
     }
 
@@ -136,16 +135,66 @@ popup.addEventListener("touchend", function (e) {
     if (touchEndX - touchStartX > 50) {
         prevImage();
     }
-    const music = document.getElementById("bgMusic");
+});
+const music = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 
-function toggleMusic() {
-    if (music.paused) {
+function toggleMusic(){
+
+    if(music.paused){
+
         music.play();
-        musicBtn.innerHTML = "⏸ Pause Music";
-    } else {
+
+        musicBtn.innerHTML="Music";
+
+    }else{
+
         music.pause();
-        musicBtn.innerHTML = "▶ Play Music";
+
+        musicBtn.innerHTML="🔊 Music ON";
+
     }
+
 }
+window.addEventListener("load", function () {
+
+    setTimeout(function () {
+
+        const loader = document.getElementById("loader");
+
+        loader.style.opacity = "0";
+
+        setTimeout(function () {
+
+            loader.style.display = "none";
+
+        },800);
+
+    },3000);
+
 });
+// =========================
+// Gold Glitter Animation
+// =========================
+
+const goldContainer = document.getElementById("goldParticles");
+
+for(let i=0;i<80;i++){
+
+    const particle=document.createElement("div");
+
+    particle.className="gold";
+
+    particle.style.left=Math.random()*100+"vw";
+
+    particle.style.animationDuration=(5+Math.random()*8)+"s";
+
+    particle.style.animationDelay=Math.random()*8+"s";
+
+    particle.style.width=(4+Math.random()*8)+"px";
+
+    particle.style.height=particle.style.width;
+
+    goldContainer.appendChild(particle);
+
+}

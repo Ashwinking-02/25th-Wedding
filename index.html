@@ -1,81 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>25th Wedding Anniversary</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
+<body>
+    <div id="goldParticles"></div>
+<div id="loader">
+
+    <div class="loader-content">
+
+        <div class="rings">💍</div>
+
+        <h1>Happy 25th Wedding Anniversary</h1>
+
+        <p>Loading Beautiful Memories...</p>
+
+    </div>
+
+</div>
 <header>
     <h1>❤️ Happy 25th Wedding Anniversary ❤️</h1>
     <p>Celebrating 25 Years of Love, Laughter & Togetherness</p>
+
+    <button id="musicBtn" onclick="toggleMusic()">
+🔊 Music ON
+</button>
 </header>
-
-<div class="gallery" id="gallery"></div>
-
-<!-- <div id="popup" class="popup" onclick="closeImage()">
-    <img id="popupImg">
-</div> -->
-<div id="popup" class="popup">
-
-    <span class="close" onclick="closeImage()">&times;</span>
-
-    <button class="prev" onclick="prevImage()">❮</button>
-
-    <img id="popupImg">
-
-    <button class="next" onclick="nextImage()">❯</button>
-
-</div>
-<script src="script.js"></script>
-
-</body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>25th Wedding Anniversary</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header>
-    <h1>❤️ Happy 25th Wedding Anniversary ❤️</h1>
-    <p>Celebrating 25 Years of Love, Laughter & Togetherness</p>
-</header>
-
-<div class="music-player">
-    <button id="musicBtn" onclick="toggleMusic()">▶ Play Music</button>
-</div>
 
 <audio id="bgMusic" loop>
     <source src="music/song.mp3" type="audio/mpeg">
 </audio>
 
-<div class="gallery" id="gallery"></div>
 
-<!-- <div id="popup" class="popup" onclick="closeImage()">
-    <img id="popupImg">
-</div> -->
- <div id="popup" class="popup">
 
-    <span class="close" onclick="closeImage()">&times;</span>
+<div id="gallery" class="gallery"></div>
 
-    <button class="prev" onclick="prevImage()">❮</button>
+<div id="popup" class="popup">
 
-    <img id="popupImg">
+<span class="close" onclick="closeImage()">&times;</span>
+
+<button class="prev" onclick="prevImage()">❮</button>
+
+<img id="popupImg">
+
 <a id="downloadBtn" download>
-    <button class="download-btn">
-        📥 Download
-    </button>
+<button class="download-btn">
+📥 Download
+</button>
 </a>
-    <button class="next" onclick="nextImage()">❯</button>
 
- </div>
+<button class="next" onclick="nextImage()">❯</button>
+
+</div>
+
 <script src="script.js"></script>
 
 </body>
