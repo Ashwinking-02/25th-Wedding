@@ -1,15 +1,4 @@
-const music = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
 
-function toggleMusic() {
-    if (music.paused) {
-        music.play();
-        musicBtn.innerHTML = "⏸ Pause Music";
-    } else {
-        music.pause();
-        musicBtn.innerHTML = "▶ Play Music";
-    }
-}
 const gallery = document.getElementById("gallery");
 const totalImages = 22; // Change to 332 later if needed
 
@@ -147,4 +136,16 @@ popup.addEventListener("touchend", function (e) {
     if (touchEndX - touchStartX > 50) {
         prevImage();
     }
+    const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+function toggleMusic() {
+    if (music.paused) {
+        music.play();
+        musicBtn.innerHTML = "⏸ Pause Music";
+    } else {
+        music.pause();
+        musicBtn.innerHTML = "▶ Play Music";
+    }
+}
 });
