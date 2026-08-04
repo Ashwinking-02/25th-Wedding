@@ -1,5 +1,5 @@
  const gallery = document.getElementById("gallery");
-const totalImages = 88; // Change to 332 later if needed
+const totalImages = 90; // Change to 332 later if needed
 
 let currentImage = 1;
 
