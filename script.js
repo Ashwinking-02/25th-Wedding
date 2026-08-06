@@ -1,14 +1,28 @@
- const gallery = document.getElementById("gallery");
-const totalImages = 90; // Change to 332 later if needed
+const gallery = document.getElementById("gallery");
+const popup = document.getElementById("popup");
+const popupImg = document.getElementById("popupImg");
+const downloadBtn = document.getElementById("downloadBtn");
+
+const totalImages = 90;
 
 let currentImage = 1;
 
-// Load Images
+// Zoom Variables
+let scale = 1;
+let startDistance = 0;
+
+// =========================
+// Load Gallery Images
+// =========================
+
 for (let i = 1; i <= totalImages; i++) {
 
     const img = document.createElement("img");
 
     img.src = `images/${i}.JPG`;
+
+    img.loading = "lazy";
+    img.decoding = "async";
 
     img.onclick = function () {
         openImage(i);
@@ -17,71 +31,108 @@ for (let i = 1; i <= totalImages; i++) {
     gallery.appendChild(img);
 }
 
+// =========================
+// Open Image
+// =========================
+
 function openImage(index){
 
     currentImage = index;
 
-    document.getElementById("popup").style.display = "flex";
+    popup.style.display = "flex";
 
-    document.getElementById("popupImg").src =
-        `images/${currentImage}.JPG`;
+    popupImg.src = `images/${currentImage}.JPG`;
 
-    document.getElementById("downloadBtn").href =
-        `images/${currentImage}.JPG`;
-}
-function closeImage() {
+    downloadBtn.href = `images/${currentImage}.JPG`;
 
-    document.getElementById("popup").style.display = "none";
+    // Reset Zoom
+    scale = 1;
+    popupImg.style.transform = "scale(1)";
 }
 
-function nextImage() {
+// =========================
+// Close
+// =========================
+
+function closeImage(){
+
+    popup.style.display="none";
+
+}
+
+// =========================
+// Next
+// =========================
+
+function nextImage(){
 
     currentImage++;
 
-    if (currentImage > totalImages) {
-        currentImage = 1;
+    if(currentImage>totalImages){
+
+        currentImage=1;
+
     }
 
-    const img = document.getElementById("popupImg");
+    popupImg.classList.remove("slide-right");
+    popupImg.classList.add("slide-left");
 
-    img.classList.remove("slide-right");
-    img.classList.add("slide-left");
+    popupImg.src=`images/${currentImage}.JPG`;
 
-    img.src = `images/${currentImage}.JPG`;
+    popupImg.onload=function(){
 
-    img.onload = () => {
-        img.classList.remove("slide-left");
+        popupImg.classList.remove("slide-left");
+
     };
-    document.getElementById("downloadBtn").href= `images/${currentImage}.JPG`;
+
+    downloadBtn.href=`images/${currentImage}.JPG`;
+
+    scale=1;
+
+    popupImg.style.transform="scale(1)";
 }
-function prevImage() {
+
+// =========================
+// Previous
+// =========================
+
+function prevImage(){
 
     currentImage--;
 
-    if (currentImage < 1) {
-        currentImage = totalImages;
+    if(currentImage<1){
+
+        currentImage=totalImages;
+
     }
 
-    const img = document.getElementById("popupImg");
+    popupImg.classList.remove("slide-left");
+    popupImg.classList.add("slide-right");
 
-    img.classList.remove("slide-left");
-    img.classList.add("slide-right");
+    popupImg.src=`images/${currentImage}.JPG`;
 
-    img.src = `images/${currentImage}.JPG`;
+    popupImg.onload=function(){
 
-    img.onload = () => {
-        img.classList.remove("slide-right");
+        popupImg.classList.remove("slide-right");
+
     };
-    document.getElementById("downloadBtn").href=`images/${currentImage}.JPG`;
+
+    downloadBtn.href=`images/${currentImage}.JPG`;
+
+    scale=1;
+
+    popupImg.style.transform="scale(1)";
 }
 
-// Keyboard Controls
-document.addEventListener("keydown", function (event) {
+// =========================
+// Keyboard
+// =========================
 
-    // Only work when popup is open
-    if (document.getElementById("popup").style.display !== "flex") return;
+document.addEventListener("keydown",function(event){
 
-    switch (event.key) {
+    if(popup.style.display!=="flex") return;
+
+    switch(event.key){
 
         case "ArrowRight":
             nextImage();
@@ -95,51 +146,55 @@ document.addEventListener("keydown", function (event) {
             closeImage();
             break;
 
-        case " ":
-            event.preventDefault();
+    }
+
+});
+
+// =========================
+// Swipe
+// =========================
+
+let touchStartX=0;
+let touchEndX=0;
+
+popup.addEventListener("touchstart",function(e){
+
+    if(e.touches.length===1){
+
+        touchStartX=e.changedTouches[0].screenX;
+
+    }
+
+});
+
+popup.addEventListener("touchend",function(e){
+
+    if(e.changedTouches.length===1){
+
+        touchEndX=e.changedTouches[0].screenX;
+
+        if(touchStartX-touchEndX>50){
+
             nextImage();
-            break;
 
-        case "Home":
-            currentImage = 1;
-            document.getElementById("popupImg").src = `images/${currentImage}.JPG`;
-            break;
+        }
 
-        case "End":
-            currentImage = totalImages;
-            document.getElementById("popupImg").src = `images/${currentImage}.JPG`;
-            break;
+        if(touchEndX-touchStartX>50){
+
+            prevImage();
+
+        }
+
     }
 
 });
+
 // =========================
-// Mobile Swipe Navigation
+// Music
 // =========================
 
-let touchStartX = 0;
-let touchEndX = 0;
-
-const popup = document.getElementById("popup");
-
-popup.addEventListener("touchstart", function (e) {
-    touchStartX = e.changedTouches[0].screenX;
-});
-
-popup.addEventListener("touchend", function (e) {
-    touchEndX = e.changedTouches[0].screenX;
-
-    // Swipe Left → Next Photo
-    if (touchStartX - touchEndX > 50) {
-        nextImage();
-    }
-
-    // Swipe Right → Previous Photo
-    if (touchEndX - touchStartX > 50) {
-        prevImage();
-    }
-});
-const music = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
+const music=document.getElementById("bgMusic");
+const musicBtn=document.getElementById("musicBtn");
 
 function toggleMusic(){
 
@@ -147,7 +202,7 @@ function toggleMusic(){
 
         music.play();
 
-        musicBtn.innerHTML="Music";
+        musicBtn.innerHTML="🔇 Music OFF";
 
     }else{
 
@@ -158,28 +213,12 @@ function toggleMusic(){
     }
 
 }
-window.addEventListener("load", function () {
 
-    setTimeout(function () {
-
-        const loader = document.getElementById("loader");
-
-        loader.style.opacity = "0";
-
-        setTimeout(function () {
-
-            loader.style.display = "none";
-
-        },800);
-
-    },3000);
-
-});
 // =========================
-// Gold Glitter Animation
+// Gold Glitter
 // =========================
 
-const goldContainer = document.getElementById("goldParticles");
+const goldContainer=document.getElementById("goldParticles");
 
 for(let i=0;i<80;i++){
 
@@ -200,3 +239,59 @@ for(let i=0;i<80;i++){
     goldContainer.appendChild(particle);
 
 }
+
+// =========================
+// Pinch Zoom
+// =========================
+
+function getDistance(touches){
+
+    const dx=touches[0].clientX-touches[1].clientX;
+
+    const dy=touches[0].clientY-touches[1].clientY;
+
+    return Math.sqrt(dx*dx+dy*dy);
+
+}
+
+popupImg.addEventListener("touchstart",function(e){
+
+    if(e.touches.length===2){
+
+        startDistance=getDistance(e.touches);
+
+    }
+
+},{passive:false});
+
+popupImg.addEventListener("touchmove",function(e){
+
+    if(e.touches.length===2){
+
+        e.preventDefault();
+
+        const newDistance=getDistance(e.touches);
+
+        scale*=newDistance/startDistance;
+
+        scale=Math.max(1,Math.min(scale,4));
+
+        popupImg.style.transform=`scale(${scale})`;
+
+        startDistance=newDistance;
+
+    }
+
+},{passive:false});
+
+popupImg.addEventListener("touchend",function(){
+
+    if(scale<1){
+
+        scale=1;
+
+        popupImg.style.transform="scale(1)";
+
+    }
+
+});

@@ -1,4 +1,9 @@
-
+#popupImg{
+    touch-action:none;
+    transform-origin:center center;
+    transition:transform 0.1s ease;
+    cursor:grab;
+}
 body{
     margin:0;
     font-family:Arial,sans-serif;
@@ -246,7 +251,7 @@ header p{
 }
 /* Wedding Loader */
 
-#loader{
+/* #loader{
     position:fixed;
     top:0;
     left:0;
@@ -335,7 +340,7 @@ header p{
     100%{
         transform:translateY(-120vh) scale(1.2);
         opacity:0;
-    }
+    } 
 
 }
 /* ==========================
